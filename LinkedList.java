@@ -1,15 +1,19 @@
 public class LinkedList {
-  Node head;
-  Node tail;
+  String name;
+  Node head; // First Song of the Playlist
+  Node tail; // Last Song of the Playlist
+  Node currNode; // Current Song of the Playlist
 
-  LinkedList( Node headNode){
-    this.head = headNode;
-    this.tail = headNode;
+  LinkedList( Node playlistName){
+    this.head = null;
+    this.tail = null;
+    this.currNode = null;
   }
 
   // ***** Prerna *****
 
   // Add a song to the playlist
+  // Suggestion: You can also add Song Spotify URL if you want to the node if u want. Jus let me know if u do that.
   public void addSong(String t, String dur){
     // Adding Song from end of the DLL
 
@@ -22,7 +26,8 @@ public class LinkedList {
 
     // =================================================================
 
-    // Code Here :
+    // Code Here : 
+    // Note: Handle head and tail nodes here
 
   }
 
@@ -39,6 +44,7 @@ public void deleteAtPos(int pos){
     // =================================================================
 
     // Code Here :
+    // Note: Handle head, tail and current nodes here
 
   }
 
@@ -59,6 +65,7 @@ public void deleteAtPos(int pos){
     // =================================================================
 
     // Code Here :
+    // Note: Update Current Node as Searched Song
 
 
     return -1;
@@ -83,6 +90,7 @@ public void deleteAtPos(int pos){
 
     // ====================================================================================
     // Code Here :
+    // Note: Display Current Node Song and change it according to P or N option.
 
     return "";
   }  
@@ -98,6 +106,7 @@ public void deleteAtPos(int pos){
 
     // =================================================================================
     // Code Here :
+    // Note: Keep option to display song url link also while displaying all the song.
     
   }
 
