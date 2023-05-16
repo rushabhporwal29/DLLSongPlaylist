@@ -4,7 +4,8 @@ public class LinkedList {
   Node tail; // Last Song of the Playlist
   Node currNode; // Current Song of the Playlist
 
-  LinkedList( Node playlistName){
+  LinkedList( String playlistName){
+    this.name = playlistName;
     this.head = null;
     this.tail = null;
     this.currNode = null;
@@ -90,7 +91,7 @@ public void deleteAtPos(int pos){
 
     // ====================================================================================
     // Code Here :
-    // Note: Display Current Node Song and change it according to P or N option.
+    // Note: Display Current Node Song if 'pos' is empty and change it according to P or N option.
 
     return "";
   }  
