@@ -41,7 +41,15 @@ public class SongPlaylist {
           System.out.println("*****Find A Song from Playlist*****");
           System.out.println("Enter Name of Song to be Searched : ");
           String songName = sc.next();
-          playlist.findSong(songName);
+          int res = playlist.findSong(songName);
+          if (res == -1){
+            System.out.println("Couldn't find the song " + songName + " in the Playlist. Please try again !!!");
+          } else if (res == -2){
+            System.out.println("Your Playlist is empty. Please try again later !!!");
+          } else {
+            System.out.println("Position of Your Song is: " + res);
+            playlist.getSongAtPos(res);
+          }
           break;
         case 4:
           System.out.println("*****Track Current Song in Playlist*****");

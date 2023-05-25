@@ -30,6 +30,23 @@ public class LinkedList {
     // Code Here : 
     // Note: Handle head and tail nodes here
 
+    Node newSong = new Node();
+    newSong.setSong(t);
+    newSong.setDuration(dur);
+
+    if(head==null){
+      head = tail = newSong;  
+      head.prev = null;  
+      tail.next = null;  
+    } else{
+      tail.next = newSong;  
+      newSong.prev = tail;  
+      tail = newSong;  
+      tail.next = null;  
+    }
+
+    currNode = tail;
+
   }
 
 //   Delete a song from the playlist
@@ -52,7 +69,7 @@ public void deleteAtPos(int pos){
 // ***********************************************************************************************************************
 
 
-  // ***** Afsar *****
+  // ***** Afsar  *****
   // Find a song by name
   public int findSong(String t){
     // - Prompt for the song name. Exact name matching is fine. Partial match is not required.
@@ -66,9 +83,22 @@ public void deleteAtPos(int pos){
     // =================================================================
 
     // Code Here :
+    Node curr = head;
+    if (head == null) {
+      return -2;
+    }
+    int index = 0;
+
+    while (curr != null) {
+      String song = curr.getSong();
+      if (song.equalsIgnoreCase(t)) {
+        currNode = curr;
+        return index + 1;
+      }
+      curr = curr.next;
+      index++;
+    }
     // Note: Update Current Node as Searched Song
-
-
     return -1;
   }
 
