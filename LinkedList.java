@@ -55,7 +55,7 @@ public class LinkedList {
   }
 
   // Delete a song from the playlist
-  public void deleteAtPos(int pos) {
+  public int deleteAtPos(int pos) {
     // - Delete a song based on a position in the linked list which is input through
     // a prompt
     // - Ensure the input position is a valid one
@@ -70,6 +70,46 @@ public class LinkedList {
 
     // Code Here :
     // Note: Handle head, tail and current nodes here
+
+    if (head == null) {
+      return 0;
+    }
+
+    if ( pos <= 0){
+      return -1;
+    }
+
+    if (pos == 1) {
+      head = head.next;
+      if (head != null) {
+        head.prev = null;
+      } else {
+        tail = null;
+      }
+      return 1;
+    }
+
+    Node curr = head;
+    int currentPosition = 1;
+    while (curr != null && currentPosition < pos) {
+      curr = curr.next;
+      currentPosition++;
+    }
+
+    if (curr == null) {
+      System.out.println("Invalid Input. Position is greater than the number of songs. Please try again later !!!");
+      return -1; // position is greater than the number of nodes in the list
+    }
+
+    if (curr == tail) {
+      tail = tail.prev;
+      tail.next = null;
+    } else {
+      curr.prev.next = curr.next;
+      curr.next.prev = curr.prev;
+    }
+
+    return 1; 
 
   }
 
