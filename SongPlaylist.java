@@ -25,17 +25,23 @@ public class SongPlaylist {
           String newSongTitle = sc.next();
           System.out.println("Enter Song Duration : ");
           String newSongDuration = sc.next();
-          System.out.println("Enter Song URL: ");
-          String newSongURL = sc.next();
+          // System.out.println("Enter Song URL: ");
+          // String newSongURL = sc.next();
           playlist.addSong(newSongTitle, newSongDuration);
-          System.out.println("Added the song '"+newSongTitle+"' to the playlist");
+          System.out.println("Added the song '"+newSongTitle+"' to the playlist successfully :)");
           break;
         case 2:
           System.out.println("*****Delete A Song Based on Position*****");
           System.out.println("Enter Postion of Song to be Deleted : ");
           int songPos = sc.nextInt();
-          playlist.deleteAtPos(songPos);
-          System.out.println("Song Deleted from the playlist successfully !!!");
+          int resDel = playlist.deleteAtPos(songPos);
+          if (resDel == 1){
+            System.out.println("Song Deleted from the playlist successfully :)");
+          } else if (resDel == 0){
+            System.out.println("Your Playlist is empty. Please try again later !!!");
+          } else {
+            System.out.println("Invalid Song Position. Please try again later !!!");
+          }
           break;
         case 3:
           System.out.println("*****Find A Song from Playlist*****");
@@ -76,6 +82,12 @@ public class SongPlaylist {
           break;
       }
 
+      System.out.println("Go Back to Menu (0) or Exit (1) : ");
+      choice = sc.nextInt();
+      if (choice != 0) {
+        System.out.println("Thank You for using this Application :)");
+        return;
+      }
     }
 
   }
