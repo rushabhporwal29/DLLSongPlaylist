@@ -97,7 +97,6 @@ public class LinkedList {
     }
 
     if (curr == null) {
-      System.out.println("Invalid Input. Position is greater than the number of songs. Please try again later !!!");
       return -1; // position is greater than the number of nodes in the list
     }
 
