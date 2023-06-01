@@ -200,7 +200,7 @@ public class LinkedList {
     String userInput;
 
     while (true) {
-      System.out.println("Current Song is  " + pos + ". " + current.getSong());
+      System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
       System.out.print("Enter 'N' for next track, 'P' for previous track, or 'E' to exit: ");
       userInput = scanner.nextLine().trim().toUpperCase();
 
@@ -252,7 +252,7 @@ public class LinkedList {
     int position = 1;
     while (current != null) {
       System.out.println(
-          position + ". " + current.getSong() + "  <" + current.getDuration() + ">" + "  " + current.getSongLink());
+          position + ". " + current.getSong() + "  <" + current.getDuration() + ">  "); //+ current.getSongLink());
       current = current.next;
       position++;
     }
