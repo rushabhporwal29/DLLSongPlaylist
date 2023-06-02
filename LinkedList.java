@@ -294,15 +294,22 @@ public class LinkedList {
       if( j.getSong().compareTo(x) <= 0){
         i = (i == null) ? low : i.next;
         String temp = i.getSong();
+        String temp_dur = i.getDuration();
         i.setSong(j.getSong());
+        i.setDuration(j.getDuration());
         j.setSong(temp);
+        j.setDuration(temp_dur);
       }
     }
 
     i = (i == null) ? low : i.next;
     String temp = i.getSong();
+    String temp_dur = i.getDuration();
     i.setSong(high.getSong());
+    i.setDuration(high.getDuration());
     high.setSong(temp);
+    high.setDuration(temp_dur);
+
     return i;
   }
 
