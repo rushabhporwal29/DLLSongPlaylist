@@ -275,5 +275,44 @@ public class LinkedList {
     // ====================================================================================
 
     // Code Here :
+        
+     // Call the recursive QuickSort
+     _quickSort(this.head, this.tail);
+
   }
+
+
+  // Considers last element as pivot, places the pivot element at its correct position in sorted array,
+  // and places all smaller (smaller than pivot) to left of pivot and all greater elements to right of pivot
+  public Node partition(Node low, Node high){
+
+    // set high as pivot element
+    String x = high.getSong();
+    Node i = low.prev;
+
+    for(Node j = low; j != high; j = j.next){
+      if( j.getSong().compareTo(x) <= 0){
+        i = (i == null) ? low : i.next;
+        String temp = i.getSong();
+        i.setSong(j.getSong());
+        j.setSong(temp);
+      }
+    }
+
+    i = (i == null) ? low : i.next;
+    String temp = i.getSong();
+    i.setSong(high.getSong());
+    high.setSong(temp);
+    return i;
+  }
+
+  void _quickSort(Node l,Node h)
+  {
+      if(h!=null && l!=h && l!=h.next){
+          Node temp = partition(l,h);
+          _quickSort(l,temp.prev);
+          _quickSort(temp.next,h);
+      }
+  }
+     
 }
