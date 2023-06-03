@@ -123,6 +123,10 @@ public class LinkedList {
       return -1;
     }
 
+    if (pos > count) {
+      return -1; // position is greater than the number of nodes in the list
+    }
+
     if (pos == 1) {
       head = head.next;
       if (head != null) {
@@ -130,27 +134,38 @@ public class LinkedList {
       } else {
         tail = null;
       }
+      count --;
+      return 1;
+    } else if (pos == count) {
+      tail = tail.prev;
+      tail.next = null;
+      count --;
       return 1;
     }
 
-    Node curr = head;
-    int currentPosition = 1;
-    while (curr != null && currentPosition < pos) {
-      curr = curr.next;
-      currentPosition++;
-    }
-
-    if (curr == null) {
-      return -1; // position is greater than the number of nodes in the list
-    }
-
-    if (curr == tail) {
-      tail = tail.prev;
-      tail.next = null;
+    Node curr;
+    if (pos <= count/2) {
+        curr = head;
+        int currentPosition = 1;
+        while (curr != null && currentPosition < pos) {
+          curr = curr.next;
+          currentPosition++;
+        }
+        curr.prev.next = curr.next;
+        curr.next.prev = curr.prev;
+        curr = null;
     } else {
-      curr.prev.next = curr.next;
-      curr.next.prev = curr.prev;
+      curr = tail;
+      int currentPosition = count;
+      while (curr != null && currentPosition > pos) {
+        curr = curr.prev;
+        currentPosition--;
+      }
     }
+    
+    curr.prev.next = curr.next;
+    curr.next.prev = curr.prev;
+    curr = null;
 
     count --;
     return 1; 
@@ -225,21 +240,32 @@ public class LinkedList {
     }
 
     if (pos <= 0) {
-      System.out.println("Invalid position. Position must be greater than 0.");
+      System.out.println("Invalid position. Position must be greater than 0. Please try again.");
       return "";
     }
 
+    if (pos > count) {
+      System.out.println("Invalid input. Position must be less than or equal to maximum Songs. Please try again.");
+      return "";
+    }
+    
     Node current = head;
-    int position = 1;
-
-    while (current != null && position < pos) {
-      current = current.next;
-      position++;
-    }
-
-    if (current == null) {
-      System.out.println("WARNING:End of playlist reached.");
-      return "";
+    if (pos <= count/2){
+      current = head;
+      int position = 1;
+  
+      while (current != null && position < pos) {
+        current = current.next;
+        position++;
+      }
+    }else if(pos > count/2){
+      current = tail;
+      int position = count;
+  
+      while (current != null && position < pos) {
+        current = current.prev;
+        position--;
+      }
     }
 
     Scanner scanner = new Scanner(System.in);
@@ -270,7 +296,7 @@ public class LinkedList {
         System.out.println("Invalid input. Please try again.");
       }
     }
-    scanner.close();
+    // scanner.close();
     return current.getSong();
   }
 
