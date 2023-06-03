@@ -35,6 +35,33 @@ public class LinkedList {
     // Code Here :
     // Note: Handle head and tail nodes here
 
+    if (findDuplicate(t) != -1) {
+      System.out.println("The song '" + t + "' already exists in the playlist.");
+      return;
+    }
+
+    String[] durationParts = dur.split(":");
+    if (durationParts.length != 2) {
+      System.out.println("Invalid duration format. Please try again.");
+      return;
+    }
+
+    int minutes, seconds;
+    try {
+      minutes = Integer.parseInt(durationParts[0]);
+      seconds = Integer.parseInt(durationParts[1]);
+
+      if (seconds >= 60) {
+        throw new IllegalArgumentException("Invalid duration format. Seconds must be less than 60, Please try again");
+      }
+    } catch (NumberFormatException e) {
+      System.out.println("Invalid duration format. Please try again.");
+      return;
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+      return;
+    }
+
     Node newSong = new Node();
     newSong.setSong(t);
     newSong.setDuration(dur);
@@ -51,8 +78,22 @@ public class LinkedList {
     }
 
     currNode = tail;
-
+    System.out.println("Added the song '" + t + "' to the playlist successfully :)");
   }
+
+  public int findDuplicate(String t) {
+    Node current = head;
+    int position = 1;
+
+    while (current != null) {
+      if (current.getSong().equalsIgnoreCase(t)) {
+        return position;
+      }
+      current = current.next;
+      position++;
+    }
+    return -1;
+}
 
   // Delete a song from the playlist
   public int deleteAtPos(int pos) {
@@ -130,6 +171,7 @@ public class LinkedList {
     // =================================================================
 
     // Code Here :
+
     Node curr = head;
     if (head == null) {
       return -2;
@@ -192,7 +234,7 @@ public class LinkedList {
     }
 
     if (current == null) {
-      System.out.println("End of playlist reached.");
+      System.out.println("WARNING:End of playlist reached.");
       return "";
     }
 
@@ -209,14 +251,14 @@ public class LinkedList {
           current = current.next;
           pos++;
         } else {
-          System.out.println("End of playlist reached.");
+          System.out.println("WARNING:End of playlist reached.");
         }
       } else if (userInput.equals("P")) {
         if (current.prev != null) {
           current = current.prev;
           pos--;
         } else {
-          System.out.println("Beginning of playlist reached.");
+          System.out.println("WARNING:Beginning of playlist reached");
         }
       } else if (userInput.equals("E")) {
         break;
@@ -224,6 +266,7 @@ public class LinkedList {
         System.out.println("Invalid input. Please try again.");
       }
     }
+    scanner.close();
     return current.getSong();
   }
 
