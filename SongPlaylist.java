@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class SongPlaylist {
   public static void main(String[] args) {
@@ -10,6 +11,7 @@ public class SongPlaylist {
     String playlistName = sc.nextLine();
     LinkedList playlist = new LinkedList(playlistName);
     while (true) {
+      try{
       // System.out.println("Clear Console");
       clearConsole();
       System.out.println(playlistName + " - Playlist Operations :   ");
@@ -22,19 +24,19 @@ public class SongPlaylist {
       System.out.println("6. Display playlist");
       System.out.println("0. Exit");
       System.out.println("Enter Menu Option : ");
-      int choice = sc.nextInt();
+      int choice ;
+      choice = sc.nextInt();
       sc.nextLine();
       switch (choice) {
         case 1:
           System.out.println("*****Add New Song*****");
           System.out.println("Enter Song Title : ");
           String newSongTitle = sc.nextLine();
-          System.out.println("Enter Song Duration : ");
+          System.out.println("Enter Song Duration (mm:ss): ");
           String newSongDuration = sc.next();
           // System.out.println("Enter Song URL: ");
           // String newSongURL = sc.next();
           playlist.addSong(newSongTitle, newSongDuration);
-          System.out.println("Added the song '" + newSongTitle + "' to the playlist successfully :)");
           break;
         case 2:
           System.out.println("*****Delete A Song Based on Position*****");
@@ -83,6 +85,7 @@ public class SongPlaylist {
           break;
         case 0:
           System.out.println("Thank You for using this Application :)");
+          sc.close();
           return;
 
         default:
@@ -93,11 +96,18 @@ public class SongPlaylist {
       System.out.println("Go Back to Menu (1) or Exit (0) : ");
       choice = sc.nextInt();
       sc.nextLine();
-      if (choice != 1) {
+      if (choice == 0) {
         System.out.println("Thank You for using this Application :)");
+        sc.close();
         return;
       }
-      
+    }
+
+    catch(Exception e){
+      System.out.println("Something went wrong[invalid input exception],Thank You for using this Application :)");
+      sc.close();
+      return;
+    }
     }
 
   }
