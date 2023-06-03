@@ -5,12 +5,14 @@ public class LinkedList {
   Node head; // First Song of the Playlist
   Node tail; // Last Song of the Playlist
   Node currNode; // Current Song of the Playlist
+  int count; // Number of songs in the Playlist
 
   LinkedList(String playlistName) {
     this.name = playlistName;
     this.head = null;
     this.tail = null;
     this.currNode = null;
+    this.count = 0;
   }
 
   // ***** Prerna *****
@@ -78,6 +80,7 @@ public class LinkedList {
     }
 
     currNode = tail;
+    count++;
     System.out.println("Added the song '" + t + "' to the playlist successfully :)");
   }
 
@@ -149,6 +152,7 @@ public class LinkedList {
       curr.next.prev = curr.prev;
     }
 
+    count --;
     return 1; 
 
   }
@@ -291,7 +295,7 @@ public class LinkedList {
     }
 
     Node current = head;
-    System.out.println("Playlist Songs:");
+    System.out.println("Playlist Songs (" + count + ") :");
     int position = 1;
     while (current != null) {
       System.out.println(
