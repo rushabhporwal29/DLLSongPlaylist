@@ -76,8 +76,7 @@ public class SongPlaylist {
         case 5:
           System.out.println("*****Sorting The Playlist Based on Song Name*****");
           playlist.sortList();
-          System.out.println("Playlist Sorted Successfully :) \n Check Display Playlist Option to check the Sorted Playlist Order.");
-
+          System.out.println("Playlist Sorted Successfully :) \n");
           break;
         case 6:
           System.out.println("*****Displaying The Complete Playlist*****");
