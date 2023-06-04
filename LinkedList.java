@@ -96,7 +96,14 @@ public class LinkedList {
       position++;
     }
     return -1;
-}
+  }
+
+  private void printSongDetails(Node node) {
+
+    System.out.println("Deleted Song Details:");
+    System.out.println("Song Title: " + node.getSong() + "Song Duration:" + node.getDuration());
+
+  }
 
   // Delete a song from the playlist
   public int deleteAtPos(int pos) {
@@ -119,7 +126,7 @@ public class LinkedList {
       return 0;
     }
 
-    if ( pos <= 0){
+    if (pos <= 0) {
       return -1;
     }
 
@@ -128,32 +135,36 @@ public class LinkedList {
     }
 
     if (pos == 1) {
+      Node deletedNode = head;
       head = head.next;
       if (head != null) {
         head.prev = null;
       } else {
         tail = null;
       }
-      count --;
+      count--;
+      printSongDetails(deletedNode);
       return 1;
     } else if (pos == count) {
+      Node deletedNode = tail;
       tail = tail.prev;
       tail.next = null;
-      count --;
+      count--;
+      printSongDetails(deletedNode);
       return 1;
     }
 
     Node curr;
-    if (pos <= count/2) {
-        curr = head;
-        int currentPosition = 1;
-        while (curr != null && currentPosition < pos) {
-          curr = curr.next;
-          currentPosition++;
-        }
-        curr.prev.next = curr.next;
-        curr.next.prev = curr.prev;
-        curr = null;
+    if (pos <= count / 2) {
+      curr = head;
+      int currentPosition = 1;
+      while (curr != null && currentPosition < pos) {
+        curr = curr.next;
+        currentPosition++;
+      }
+      curr.prev.next = curr.next;
+      curr.next.prev = curr.prev;
+      curr = null;
     } else {
       curr = tail;
       int currentPosition = count;
@@ -162,13 +173,14 @@ public class LinkedList {
         currentPosition--;
       }
     }
-    
+
     curr.prev.next = curr.next;
     curr.next.prev = curr.prev;
+    printSongDetails(curr);
     curr = null;
 
-    count --;
-    return 1; 
+    count--;
+    return 1;
 
   }
 
@@ -248,20 +260,20 @@ public class LinkedList {
       System.out.println("Invalid input. Position must be less than or equal to maximum Songs. Please try again.");
       return "";
     }
-    
+
     Node current = head;
-    if (pos <= count/2){
+    if (pos <= count / 2) {
       current = head;
       int position = 1;
-  
+
       while (current != null && position < pos) {
         current = current.next;
         position++;
       }
-    }else if(pos > count/2){
+    } else if (pos > count / 2) {
       current = tail;
       int position = count;
-  
+
       while (current != null && position < pos) {
         current = current.prev;
         position--;
@@ -271,24 +283,26 @@ public class LinkedList {
     Scanner scanner = new Scanner(System.in);
     String userInput;
 
+    System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
+    
     while (true) {
-      System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
       System.out.print("Enter 'N' for next track, 'P' for previous track, or 'E' to exit: ");
       userInput = scanner.nextLine().trim().toUpperCase();
-
       if (userInput.equals("N")) {
         if (current.next != null) {
           current = current.next;
           pos++;
+          System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
         } else {
-          System.out.println("WARNING:End of playlist reached.");
+          System.out.println("WARNING!! End of playlist reached.");
         }
       } else if (userInput.equals("P")) {
         if (current.prev != null) {
           current = current.prev;
           pos--;
+          System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
         } else {
-          System.out.println("WARNING:Beginning of playlist reached");
+          System.out.println("WARNING!! Beginning of playlist reached");
         }
       } else if (userInput.equals("E")) {
         break;
@@ -325,7 +339,7 @@ public class LinkedList {
     int position = 1;
     while (current != null) {
       System.out.println(
-          position + ". " + current.getSong() + "  <" + current.getDuration() + ">  "); //+ current.getSongLink());
+          position + ". " + current.getSong() + "  <" + current.getDuration() + ">  "); // + current.getSongLink());
       current = current.next;
       position++;
     }
@@ -348,23 +362,25 @@ public class LinkedList {
     // ====================================================================================
 
     // Code Here :
-        
-     // Call the recursive QuickSort
-     _quickSort(this.head, this.tail);
+
+    // Call the recursive QuickSort
+    _quickSort(this.head, this.tail);
+    display();
 
   }
 
-
-  // Considers last element as pivot, places the pivot element at its correct position in sorted array,
-  // and places all smaller (smaller than pivot) to left of pivot and all greater elements to right of pivot
-  public Node partition(Node low, Node high){
+  // Considers last element as pivot, places the pivot element at its correct
+  // position in sorted array,
+  // and places all smaller (smaller than pivot) to left of pivot and all greater
+  // elements to right of pivot
+  public Node partition(Node low, Node high) {
 
     // set high as pivot element
     String x = high.getSong();
     Node i = low.prev;
 
-    for(Node j = low; j != high; j = j.next){
-      if( j.getSong().compareTo(x) <= 0){
+    for (Node j = low; j != high; j = j.next) {
+      if (j.getSong().compareTo(x) <= 0) {
         i = (i == null) ? low : i.next;
         String temp = i.getSong();
         String temp_dur = i.getDuration();
@@ -386,13 +402,12 @@ public class LinkedList {
     return i;
   }
 
-  void _quickSort(Node l,Node h)
-  {
-      if(h!=null && l!=h && l!=h.next){
-          Node temp = partition(l,h);
-          _quickSort(l,temp.prev);
-          _quickSort(temp.next,h);
-      }
+  void _quickSort(Node l, Node h) {
+    if (h != null && l != h && l != h.next) {
+      Node temp = partition(l, h);
+      _quickSort(l, temp.prev);
+      _quickSort(temp.next, h);
+    }
   }
-     
+
 }
