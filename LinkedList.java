@@ -284,7 +284,7 @@ public class LinkedList {
     String userInput;
 
     System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
-    
+
     while (true) {
       System.out.print("Enter 'N' for next track, 'P' for previous track, or 'E' to exit: ");
       userInput = scanner.nextLine().trim().toUpperCase();
@@ -292,16 +292,20 @@ public class LinkedList {
         if (current.next != null) {
           current = current.next;
           pos++;
-          System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
+          System.out
+              .println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
         } else {
+          pos = count;
           System.out.println("WARNING!! End of playlist reached.");
         }
       } else if (userInput.equals("P")) {
         if (current.prev != null) {
           current = current.prev;
           pos--;
-          System.out.println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
+          System.out
+              .println("Current Song is  " + pos + ". " + current.getSong() + "  < " + current.getDuration() + " >  ");
         } else {
+          pos = 1;
           System.out.println("WARNING!! Beginning of playlist reached");
         }
       } else if (userInput.equals("E")) {
